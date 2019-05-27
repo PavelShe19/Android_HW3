@@ -1,6 +1,7 @@
 package com.example.android.myapplication;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    MediaPlayer mySong;
     TextView question;
     ListView answersList;
     ArrayAdapter<String> adapter;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         current_question_number = 1;
         max_num_of_questions = intent.getIntExtra("Num_of_questions",5);
         setContentView(R.layout.activity_main);
+        mySong=MediaPlayer.create(MainActivity.this,R.raw.elevator2);
+
 
         question = findViewById(R.id.text);
         answersList = findViewById(R.id.answersList);
@@ -63,8 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySong.release();
+    }
 
     public void getQuestion() {
+        mySong.start();
         Server.getTriviaQuestion(new Server.HandleQuestion() {
             @Override
             public void handleQuestion(Server.Question q) {

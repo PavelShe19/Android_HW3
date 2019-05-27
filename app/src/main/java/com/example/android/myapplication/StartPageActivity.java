@@ -2,6 +2,7 @@ package com.example.android.myapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,10 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class StartPageActivity extends AppCompatActivity {
+
     int number_of_questions = 5;
     EditText et1;
     Button start_button;
     TextView tv1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class StartPageActivity extends AppCompatActivity {
                     et1.setText("");
             }
 
+
             // ...
         });
         start_button = findViewById(R.id.startButton);
@@ -54,6 +58,8 @@ public class StartPageActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void start(){
         number_of_questions = Integer.parseInt(et1.getText().toString());
