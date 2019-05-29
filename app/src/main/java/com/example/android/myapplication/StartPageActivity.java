@@ -78,7 +78,7 @@ public class StartPageActivity extends AppCompatActivity {
         else
         {
             Intent fresh_intent = new Intent(StartPageActivity.this,MainActivity.class);
-            fresh_intent.putExtra("Num_of_questions",number_of_questions);
+            fresh_intent.putExtra("Num_of_questions", number_of_questions);
             startActivity(fresh_intent);
         }
 

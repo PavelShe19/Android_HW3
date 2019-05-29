@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         max_num_of_questions = intent.getIntExtra("Num_of_questions",5);
         setContentView(R.layout.activity_main);
         mySong=MediaPlayer.create(MainActivity.this,R.raw.elevator2);
-
-
         question = findViewById(R.id.text);
         answersList = findViewById(R.id.answersList);
         adapter = new ArrayAdapter<>(this,
@@ -48,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String chosen = (String)adapterView.getItemAtPosition(position);
                 if(currentQuestion.correctAnswer.equals(chosen)){
-//                    Toast.makeText(adapterView.getContext(), "right!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(adapterView.getContext(), "right!", Toast.LENGTH_SHORT).show();
                     score++;
                 } else{
-//                    Toast.makeText(adapterView.getContext(), "wrong!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(adapterView.getContext(), "wrong!", Toast.LENGTH_SHORT).show();
                 }
                 current_question_number++;
                 if(current_question_number <= max_num_of_questions) {
@@ -59,7 +57,24 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(adapterView.getContext(), "END "+score, Toast.LENGTH_LONG).show();
+
+                    if(score == max_num_of_questions){
+                        //open max score page
+
+                        Intent fresh_intent = new Intent(MainActivity.this,MaxActivity.class);
+                        fresh_intent.putExtra("score", score);
+                        fresh_intent.putExtra("MaxScore", max_num_of_questions);
+                        startActivity(fresh_intent);
+                    }
+                    else{
+                        //open normal score page
+
+                        Intent fresh_intent = new Intent(MainActivity.this,EndActivity.class);
+                        fresh_intent.putExtra("score", score);
+                        fresh_intent.putExtra("MaxScore", max_num_of_questions);
+                        startActivity(fresh_intent);
+
+                    }
                 }
             }
         });
